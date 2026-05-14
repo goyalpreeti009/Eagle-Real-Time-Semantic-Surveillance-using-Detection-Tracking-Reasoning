@@ -11,7 +11,6 @@ Usage (API):
     results = detector.detect(frame)
 """
 from __future__ import annotations
-from services.reasoning.scene_graph import SceneGraphBuilder
 import argparse
 import logging
 from pathlib import Path
@@ -192,16 +191,13 @@ def main() -> None:
         builder = SceneGraphBuilder(det_frame)
         
         builder.build_graph()
-
-        
         graph_text = builder.serialize_graph()
 
-       
-       
-       if graph_text:
-        prompt = build_reasoning_prompt(graph_text)
-        print("\nLLM PROMPT:\n")
-        print(prompt)
+        if graph_text:
+            prompt = build_reasoning_prompt(graph_text)
+            print("\nLLM PROMPT:\n")
+            print(prompt)
+        
         
 
         annotated  = draw_detections(frame, det_frame)

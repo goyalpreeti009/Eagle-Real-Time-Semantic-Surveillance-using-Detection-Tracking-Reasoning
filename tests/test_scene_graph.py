@@ -10,24 +10,7 @@ from services.reasoning.scene_graph import SceneGraphBuilder
 
 def test_scene_graph_build():
 
-    # ------------------------------------------------
-    # Complex Mock Scene
-    #
-    # restricted_door:
-    # x = 540 → 740
-    # y = 200 → 480
-    #
-    # keypad_area:
-    # x = 620 → 720
-    # y = 280 → 420
-    #
-    # safe_corridor:
-    # x = 0 → 300
-    # y = 0 → 480
-    # ------------------------------------------------
-
-    # Person near keypad inside restricted door
-
+    
     person = Detection(
         label="person",
         bbox=[600, 250, 700, 430],
@@ -38,8 +21,6 @@ def test_scene_graph_build():
             "keypad_area"
         ]
     )
-
-    # Cell phone very close to person
 
     phone = Detection(
         label="cell phone",
@@ -65,8 +46,6 @@ def test_scene_graph_build():
         ]
     )
 
-    # Another person in safe corridor
-
     person2 = Detection(
         label="person",
         bbox=[100, 100, 220, 350],
@@ -76,10 +55,6 @@ def test_scene_graph_build():
             "safe_corridor"
         ]
     )
-
-    # ------------------------------------------------
-    # Mock Detection Frame
-    # ------------------------------------------------
 
     det_frame = DetectionFrame(
         frame_id=25,
@@ -92,17 +67,9 @@ def test_scene_graph_build():
         timestamp_ms=5000
     )
 
-    # ------------------------------------------------
-    # Build Graph
-    # ------------------------------------------------
-
     builder = SceneGraphBuilder(det_frame)
 
     graph = builder.build_graph()
-
-    # ------------------------------------------------
-    # Node Assertions
-    # ------------------------------------------------
 
     assert graph.has_node("person_0")
 
@@ -117,10 +84,6 @@ def test_scene_graph_build():
     assert graph.has_node("keypad_area")
 
     assert graph.has_node("safe_corridor")
-
-    # ------------------------------------------------
-    # INSIDE Relations
-    # ------------------------------------------------
 
     assert graph.has_edge(
         "person_0",
@@ -137,9 +100,7 @@ def test_scene_graph_build():
         "safe_corridor"
     )
 
-    # ------------------------------------------------
-    # NEAR Relations
-    # ------------------------------------------------
+    
 
     assert graph.has_edge(
         "person_0",
@@ -151,9 +112,7 @@ def test_scene_graph_build():
         "backpack_2"
     )
 
-    # ------------------------------------------------
-    # HOLDING / INTERACTING_WITH
-    # ------------------------------------------------
+    
 
     assert graph.has_edge(
         "person_0",
