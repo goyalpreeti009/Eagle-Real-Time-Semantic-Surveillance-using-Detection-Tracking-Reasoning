@@ -1,4 +1,0 @@
-apps
-libs
-scripts
-services
