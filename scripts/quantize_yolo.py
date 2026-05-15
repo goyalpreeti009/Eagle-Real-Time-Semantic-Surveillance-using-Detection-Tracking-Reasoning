@@ -4,7 +4,7 @@ from roboflow import Roboflow
 
 def drone_optimized_quantization():
     # --- 1. SET YOUR ACTUAL CREDENTIALS HERE ---
-    API_KEY = "VhRgPQY3neUN0lSVdqjI"
+    API_KEY = "YOUR_ROBOFLOW_API_KEY"
     WORKSPACE = "goyalpreeti"  # Found in your Roboflow URL
     PROJECT = "drone-detection-lzvig-sa0py"      # Found in your Roboflow URL
     VERSION = 1                        # Usually 1 if it's your first version
